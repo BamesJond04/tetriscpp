@@ -10,6 +10,8 @@ System::System(int width, int height, double gravity){
     vector<char> row(width, '0');
 
     this->systemArray = vector<vector<char> > (height,row);
+
+    this->alive = true;
 }
 
 
@@ -19,5 +21,11 @@ void System::systemOut(){
             cout<<column<<" ";
         }
         cout<<"\n";
+    }
+}
+
+void System::systemRun(){
+    for (int i; i < 100; i ++){
+        systemOut();
     }
 }

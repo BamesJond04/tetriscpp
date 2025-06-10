@@ -10,11 +10,16 @@ class System {
         //values/variables
         double gravity;\
         int width, height;
+        bool alive;
         
+
         vector<vector<char> > systemArray;
 
         //functions
         void systemOut();
+        void systemRun();
+
+
 
     private:
 };

@@ -12,7 +12,7 @@ int main(){
 
     System game(5,5,9.8);
 
-    game.systemOut();
+    game.systemRun();
 
     return 0;
 }
