@@ -37,14 +37,20 @@ void System::systemOut(){
 }
 
 void System::systemRun(){
+    systemOut();
     for (int i; i < 100; i ++){
-        systemOut();
         for (int i = 0; i < blocks.size(); i++){
             systemArray[blocks[i].position[0]][blocks[i].position[1]]  = '0';
             blocks[i].updatePosition();
-
-            if (checkBoundaries(blocks[i].position) == true){
-                systemArray[blocks[i].position[0]][blocks[i].position[1]]  = '#';
+            
+            //if (checkBoundaries(blocks[i].position) == true){
+                //systemArray[blocks[i].position[0]-1][blocks[i].position[1]]  = '#';
+                //blocks[i].position = vector<int> {0,3};
+            if (checkCollisions(blocks[i].position)==true){
+                systemArray[blocks[i].position[0]-1][blocks[i].position[1]]  = '#';
+                blocks[i].position = vector<int> {0,3};}
+            else {
+                systemArray[blocks[i].position[0]][blocks[i].position[1]] = '#';
             }
         }
         systemOut();
@@ -53,14 +59,29 @@ void System::systemRun(){
 }
 
 bool System::checkBoundaries(vector<int> currentBlock){
+    //returns true if outside boundaries
     int y = currentBlock[0];
     int x = currentBlock[1];
 
-    if (y >= systemArray.size() || y < 0){
-        return false;
-    } else if (x >= systemArray[1].size() || x < 0){
-        return false;
-    } else {
+    if (y >= height  -1|| y < 0){
         return true;
+    } else if (x >= width-1 || x < 0){
+        return true;
+    } else {
+        return false;
+    }
+}
+
+bool System::checkCollisions(vector<int> currentBlock){
+    //returns true if a collision is occuring
+    int y = currentBlock[0];
+    int x = currentBlock[1];
+
+    if (y >= height){
+        return true;
+    } else if ( systemArray[y][x] ==  '#'){
+        return true;
+    } else {
+        return false;
     }
 }

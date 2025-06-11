@@ -29,7 +29,7 @@ class System {
         void systemRun();
 
         bool checkBoundaries(vector<int> currentBlock);
-
+        bool checkCollisions(vector<int> currentBlock);
 
 
     private:

@@ -8,8 +8,9 @@
 using namespace std;
 
 int main(){
+    cout<<"runningGame"<<endl;
 
-    System game(25,25,9.8);
+    System game(10,10,9.8);
 
     game.systemRun();
 
