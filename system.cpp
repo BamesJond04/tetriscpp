@@ -12,6 +12,17 @@ System::System(int width, int height, double gravity){
     this->systemArray = vector<vector<char> > (height,row);
 
     this->alive = true;
+
+
+    for (int i = 0 ; i < 1; i ++){
+        Block insertion = Block (vector<int> {0,3});
+        blocks.push_back(insertion);
+    }
+
+    this->blockInPlay = true;
+
+
+
 }
 
 
@@ -22,10 +33,34 @@ void System::systemOut(){
         }
         cout<<"\n";
     }
+    cout<<"\n";
 }
 
 void System::systemRun(){
     for (int i; i < 100; i ++){
         systemOut();
+        for (int i = 0; i < blocks.size(); i++){
+            systemArray[blocks[i].position[0]][blocks[i].position[1]]  = '0';
+            blocks[i].updatePosition();
+
+            if (checkBoundaries(blocks[i].position) == true){
+                systemArray[blocks[i].position[0]][blocks[i].position[1]]  = '#';
+            }
+        }
+        systemOut();
+        this_thread::sleep_for(chrono::milliseconds(250));
+    }   
+}
+
+bool System::checkBoundaries(vector<int> currentBlock){
+    int y = currentBlock[0];
+    int x = currentBlock[1];
+
+    if (y >= systemArray.size() || y < 0){
+        return false;
+    } else if (x >= systemArray[1].size() || x < 0){
+        return false;
+    } else {
+        return true;
     }
 }

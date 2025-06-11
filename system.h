@@ -1,5 +1,13 @@
+#ifndef SYSTEM_H
+#define SYSTEM_H
+
+
 #include <iostream>
 #include <vector>
+#include <chrono>
+#include <thread>
+
+#include "block.h"
 
 using namespace std;
 
@@ -8,10 +16,11 @@ class System {
         System(int width, int height, double gravity);
 
         //values/variables
-        double gravity;\
+        double gravity;
         int width, height;
-        bool alive;
+        bool alive, blockInPlay;
         
+        vector<Block> blocks;
 
         vector<vector<char> > systemArray;
 
@@ -19,7 +28,11 @@ class System {
         void systemOut();
         void systemRun();
 
+        bool checkBoundaries(vector<int> currentBlock);
+
 
 
     private:
 };
+
+#endif
