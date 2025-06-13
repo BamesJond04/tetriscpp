@@ -13,16 +13,25 @@ vector<int> Block::nextPosition(vector<int> currentPosition){
 
     int xCorrect = checkBoundaries(x);
 
-    vector<int> out;
+    vector<int> out = {x,y};
 
-    if (moveChar == 'a'){
-        out = {y,x-1+xCorrect};
-    } else if (moveChar == 'd'){
-        out = {y,x+1 + xCorrect};
-    } else if (moveChar == 'w'){
-        //add rotation of blocks
-    } else if (moveChar == 's'){
-        out = {y+1,x};
+    //if (moveChar == 'a'){
+        //out = {y,x-1+xCorrect};
+    //} else if (moveChar == 'd'){
+        //out = {y,x+1 + xCorrect};
+    //} else if (moveChar == 'w'){
+        ////add rotation of blocks
+    //} else if (moveChar == 's'){
+        //out = {y+1,x};
+    //}
+    
+    switch (moveChar) {
+        case 'a':
+            out[1] += -1 + xCorrect;
+        case 'd':
+            out[1] += 1 + xCorrect;
+        case 's':
+            out[0] += 1+ xCorrect;
     }
 
     out[0] += 1;
