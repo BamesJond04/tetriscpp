@@ -47,6 +47,7 @@ void System::systemRun(char input){
         for (int i = 0; i < blocks.size(); i++){
 
             systemArray[blocks[i].position[0]][blocks[i].position[1]]  = '0';
+            
             blocks[i].moveChar = input;
             blocks[i].updatePosition();
             

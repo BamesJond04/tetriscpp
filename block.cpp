@@ -13,7 +13,7 @@ vector<int> Block::nextPosition(vector<int> currentPosition){
 
     int xCorrect = checkBoundaries(x);
 
-    vector<int> out = {x,y};
+    vector<int> out = {y,x};
 
     //if (moveChar == 'a'){
         //out = {y,x-1+xCorrect};
@@ -28,10 +28,13 @@ vector<int> Block::nextPosition(vector<int> currentPosition){
     switch (moveChar) {
         case 'a':
             out[1] += -1 + xCorrect;
+            break;
         case 'd':
             out[1] += 1 + xCorrect;
+            break;
         case 's':
             out[0] += 1+ xCorrect;
+            break;
     }
 
     out[0] += 1;
@@ -46,7 +49,7 @@ void Block::updatePosition(){
 signed int Block::checkBoundaries(int x){
     if (x > width-1){
         return -1;
-    } else if (x<0){
+    } else if (x<=0){
         return +1;
     } else {
         return 0;
