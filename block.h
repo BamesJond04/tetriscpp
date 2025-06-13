@@ -16,6 +16,8 @@ class Block {
         //currently block will be a single character (point)
         vector<int> position;
 
+        char moveChar;
+
         vector<int> nextPosition(vector<int> currentPosition);
         void updatePosition();
         

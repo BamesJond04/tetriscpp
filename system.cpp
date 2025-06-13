@@ -40,6 +40,8 @@ void System::systemRun(){
     systemOut();
     for (int i; i < 100; i ++){
         for (int i = 0; i < blocks.size(); i++){
+            cin >> blocks[i].moveChar;
+
             systemArray[blocks[i].position[0]][blocks[i].position[1]]  = '0';
             blocks[i].updatePosition();
             

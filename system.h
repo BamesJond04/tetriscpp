@@ -19,6 +19,8 @@ class System {
         double gravity;
         int width, height;
         bool alive, blockInPlay;
+
+
         
         vector<Block> blocks;
 
