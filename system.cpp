@@ -26,23 +26,28 @@ System::System(int width, int height, double gravity){
 }
 
 
-void System::systemOut(){
+
+void System::giveSpacedArray(){
+    string out = "";
     for (const vector<char>& row : systemArray){
-        for (const char& column: row){
-            cout<<column<<" ";
-        }
-        cout<<"\n";
+        string s(row.begin(),row.end());
+        out += s + "\n";
     }
-    cout<<"\n";
+    flatArray = out;
 }
 
-void System::systemRun(){
-    systemOut();
-    for (int i; i < 100; i ++){
+void System::systemOut(){
+    giveSpacedArray();
+    const char *out = flatArray.c_str();
+    printw(out);
+}   
+
+void System::systemRun(char input){
+    clear();
         for (int i = 0; i < blocks.size(); i++){
-            cin >> blocks[i].moveChar;
 
             systemArray[blocks[i].position[0]][blocks[i].position[1]]  = '0';
+            blocks[i].moveChar = input;
             blocks[i].updatePosition();
             
             //if (checkBoundaries(blocks[i].position) == true){
@@ -56,8 +61,7 @@ void System::systemRun(){
             }
         }
         systemOut();
-        this_thread::sleep_for(chrono::milliseconds(250));
-    }   
+        refresh();
 }
 
 bool System::checkBoundaries(vector<int> currentBlock){

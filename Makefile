@@ -1,6 +1,6 @@
 CC = g++
 
-FLAGS = -std=c++11
+FLAGS = -std=c++11 -lncurses
 
 SRC = main.cpp system.cpp block.cpp
 

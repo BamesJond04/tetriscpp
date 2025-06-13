@@ -6,6 +6,8 @@
 #include <vector>
 #include <chrono>
 #include <thread>
+#include <ncurses.h>
+#include <string>
 
 #include "block.h"
 
@@ -20,6 +22,8 @@ class System {
         int width, height;
         bool alive, blockInPlay;
 
+        string flatArray;
+
 
         
         vector<Block> blocks;
@@ -28,10 +32,13 @@ class System {
 
         //functions
         void systemOut();
-        void systemRun();
+        void systemRun(char input);
 
         bool checkBoundaries(vector<int> currentBlock);
         bool checkCollisions(vector<int> currentBlock);
+
+
+        void giveSpacedArray();
 
 
     private:
