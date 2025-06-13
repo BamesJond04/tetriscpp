@@ -34,8 +34,10 @@ class System {
         void systemOut();
         void systemRun(char input);
 
-        bool checkBoundaries(vector<int> currentBlock);
+        signed int checkBoundaries(vector<int> currentBlock);
         bool checkCollisions(vector<int> currentBlock);
+
+
 
 
         void giveSpacedArray();

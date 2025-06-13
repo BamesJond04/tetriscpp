@@ -16,7 +16,7 @@ int main(int argc, char ** argv){
     refresh();
     System game(10,10,9.8);
 
-    halfdelay(1);
+    halfdelay(300);
 
     game.systemOut();
     refresh();

@@ -15,7 +15,7 @@ System::System(int width, int height, double gravity){
 
 
     for (int i = 0 ; i < 1; i ++){
-        Block insertion = Block (vector<int> {0,3});
+        Block insertion = Block (vector<int> {0,3}, width);
         blocks.push_back(insertion);
     }
 
@@ -53,6 +53,9 @@ void System::systemRun(char input){
             //if (checkBoundaries(blocks[i].position) == true){
                 //systemArray[blocks[i].position[0]-1][blocks[i].position[1]]  = '#';
                 //blocks[i].position = vector<int> {0,3};
+
+            //blocks[i].position[1] += checkBoundaries(blocks[i].position);
+
             if (checkCollisions(blocks[i].position)==true){
                 systemArray[blocks[i].position[0]-1][blocks[i].position[1]]  = '#';
                 blocks[i].position = vector<int> {0,3};}
@@ -62,19 +65,21 @@ void System::systemRun(char input){
         }
         systemOut();
         refresh();
+
+        napms(300);
 }
 
-bool System::checkBoundaries(vector<int> currentBlock){
-    //returns true if outside boundaries
+signed int System::checkBoundaries(vector<int> currentBlock){
+    //returns amount required to move back inside X boundaries
     int y = currentBlock[0];
     int x = currentBlock[1];
 
-    if (y >= height  -1|| y < 0){
-        return true;
-    } else if (x >= width-1 || x < 0){
-        return true;
+    if (x >= width-1){
+        return width -x;
+    } else if (x<0){
+        return -x;
     } else {
-        return false;
+        return 0;
     }
 }
 
