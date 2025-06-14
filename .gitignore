@@ -1,4 +1,5 @@
 *.o
+*.bundle
 
 
 *.DS_Store

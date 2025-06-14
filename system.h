@@ -34,7 +34,6 @@ class System {
         void systemOut();
         void systemRun(char input);
 
-        signed int checkBoundaries(vector<int> currentBlock);
         bool checkCollisions(vector<int> currentBlock);
 
 

@@ -4,7 +4,7 @@ using namespace std;
 
 System::System(int width, int height, double gravity){
     this->width = width;
-    this->height = height;
+    this->height = height + 1;
     this->gravity = gravity;
 
     vector<char> row(width, '0');
@@ -37,6 +37,7 @@ void System::giveSpacedArray(){
 }
 
 void System::systemOut(){
+    systemArray[height-1] = vector<char> (width, ' ');
     giveSpacedArray();
     const char *out = flatArray.c_str();
     printw(out);
@@ -49,51 +50,42 @@ void System::systemRun(char input){
             systemArray[blocks[i].position[0]][blocks[i].position[1]]  = '0';
             
             blocks[i].moveChar = input;
-            blocks[i].updatePosition();
-            
-            //if (checkBoundaries(blocks[i].position) == true){
-                //systemArray[blocks[i].position[0]-1][blocks[i].position[1]]  = '#';
-                //blocks[i].position = vector<int> {0,3};
 
-            //blocks[i].position[1] += checkBoundaries(blocks[i].position);
+            vector<int> nextPos = blocks[i].nextPosition(blocks[i].position);
 
-            if (checkCollisions(blocks[i].position)==true){
-                systemArray[blocks[i].position[0]-1][blocks[i].position[1]]  = '#';
-                blocks[i].position = vector<int> {0,3};}
-            else {
+            bool collision = checkCollisions(nextPos);
+ 
+            if (collision){
+                systemArray[blocks[i].position[0]][blocks[i].position[1]] = '#';
+                if (systemArray[blocks[i].position[0]+1][blocks[i].position[1]] == '#' || (blocks[i].position[0]+1)>= height-1){
+                    blocks[i].position = vector<int> {0,3};
+                }
+            } else {
+                blocks[i].updatePosition();
                 systemArray[blocks[i].position[0]][blocks[i].position[1]] = '#';
             }
+            
         }
+
         systemOut();
         refresh();
 
         napms(300);
 }
 
-signed int System::checkBoundaries(vector<int> currentBlock){
-    //returns amount required to move back inside X boundaries
-    int y = currentBlock[0];
-    int x = currentBlock[1];
-
-    if (x >= width-1){
-        return width -x;
-    } else if (x<0){
-        return -x;
-    } else {
-        return 0;
-    }
-}
 
 bool System::checkCollisions(vector<int> currentBlock){
     //returns true if a collision is occuring
     int y = currentBlock[0];
     int x = currentBlock[1];
 
-    if (y >= height){
-        return true;
-    } else if ( systemArray[y][x] ==  '#'){
-        return true;
-    } else {
-        return false;
+    char thisPosition = systemArray[y][x];
+
+    bool out = false;
+
+    if (thisPosition == '#' || y >= height-1){
+        out = true;
     }
+
+    return out;
 }
