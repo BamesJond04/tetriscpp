@@ -1,4 +1,4 @@
-# Basic Tetris Simulator
+# Basic Tetris Recreation
 
 This is heavily inspired by other people who have likely done it both better and faster :)
 
